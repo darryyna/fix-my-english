@@ -1,21 +1,7 @@
-import { useEffect } from 'react';
-import { Text, View } from 'react-native';
-import { supabase } from '@/lib/supabase';
+import { Redirect } from 'expo-router';
+import { useAuthStore } from '@/store/authStore';
 
 export default function Index() {
-    useEffect(() => {
-        supabase.auth.getSession().then(({ data, error }) => {
-            if (error) {
-                console.log('Supabase connection ERROR:', error.message);
-            } else {
-                console.log('Supabase connected OK. Session:', data.session);
-            }
-        });
-    }, []);
-
-    return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Fix My English</Text>
-        </View>
-    );
+  const session = useAuthStore((s) => s.session);
+  return <Redirect href={session ? '/(tabs)' : '/(auth)/login'} />;
 }
