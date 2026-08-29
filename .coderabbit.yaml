@@ -1,0 +1,67 @@
+# CodeRabbit repository configuration.
+# Docs: https://docs.coderabbit.ai/getting-started/yaml-configuration
+# Must live at the repo root and be committed to the default branch (develop/main).
+
+language: "en-US"
+
+tone_instructions: >
+  Keep reviews concise and focused. Explain why a change is problematic,
+  not only what should be changed. This is a solo pet project using
+  Expo Router, TypeScript, and Supabase, so do not require unnecessary
+  enterprise-level practices such as monorepo architecture or CODEOWNERS
+  for individual PRs.
+
+reviews:
+  profile: "chill"
+  request_changes_workflow: false
+  high_level_summary: true
+  poem: false
+  review_status: true
+  review_details: false
+  auto_review:
+    enabled: true
+    drafts: false
+
+  path_filters:
+    - "!**/*.lock"
+    - "!package-lock.json"
+    - "!**/*.svg"
+    - "!assets/**"
+    - "!.expo/**"
+
+  path_instructions:
+    - path: "app/**/*.tsx"
+      instructions: >
+        These are Expo Router screens using React Native and TypeScript.
+        Check for correct hook usage, unnecessary inline functions that could
+        hurt memoization in large lists, accessibility including
+        accessibilityLabel on interactive elements, and consistent use of
+        design tokens from constants/theme.ts instead of hardcoded hex colors.
+
+    - path: "store/**/*.ts"
+      instructions: >
+        These are Zustand stores. Check for unnecessary re-renders by ensuring
+        selectors are sufficiently narrow, correct handling of Supabase errors,
+        and proper cleanup of side effects such as authentication listeners
+        and subscriptions.
+
+    - path: "supabase/migrations/**/*.sql"
+      instructions: >
+        Review SQL migrations carefully. Row Level Security must be enabled
+        on new tables and appropriate policies must be defined. Foreign keys
+        must have an explicit and appropriate ON DELETE behavior. Prefer
+        idempotent migrations where appropriate, using CREATE IF NOT EXISTS
+        and DROP IF EXISTS before recreating objects when this is safe.
+
+    - path: "lib/supabase.ts"
+      instructions: >
+        Supabase URL and keys must come exclusively from
+        process.env.EXPO_PUBLIC_*. Never hardcode credentials, API keys,
+        URLs, or other secrets directly in the source code.
+
+chat:
+  auto_reply: true
+
+knowledge_base:
+  learnings:
+    scope: "auto"
