@@ -4,11 +4,7 @@ export type LearningGoal = 'general' | 'travel' | 'business' | 'custom';
 
 export type FocusArea = 'grammar' | 'vocabulary';
 
-export interface WeakTopic {
-  topic: string;
-  // 1-100
-  progress: number;
-}
+export type DailyGoalMinutes = 5 | 10 | 15 | 20 | 30;
 
 export interface Profile {
   id: string;
@@ -22,16 +18,32 @@ export interface Profile {
   goal: LearningGoal | null;
   custom_goal_topic: string | null;
   focus: FocusArea[] | null;
-  daily_goal_minutes: number | null;
+  daily_goal_minutes: DailyGoalMinutes | null;
 
-  grammar_progress: number;
-  vocabulary_progress: number;
   learned_words_count: number;
-  weak_topics: WeakTopic[];
-
   assessment_completed: boolean;
+
   created_at: string;
   updated_at: string;
+}
+
+export interface AssessmentRow {
+    id: string;
+    user_id: string;
+    suggested_level: EnglishLevel;
+    grammar_score: number;
+    vocabulary_score: number;
+    completed_at: string;
+    created_at: string;
+}
+
+export interface AssessmentWeakTopicRow {
+    id: string;
+    assessment_id: string;
+    category: FocusArea;
+    topic: string;
+    score: number;
+    created_at: string;
 }
 
 export interface Database {
@@ -41,6 +53,21 @@ export interface Database {
         Row: Profile;
         Insert: Partial<Profile> & { id: string };
         Update: Partial<Profile>;
+      };
+
+      assessments: {
+        Row: AssessmentRow;
+        Insert: Omit<
+          AssessmentRow,
+          'id' | 'created_at'
+        >;
+        Update: never;
+      };
+
+      assessment_weak_topics: {
+        Row: AssessmentWeakTopicRow;
+        Insert: Omit<AssessmentWeakTopicRow, 'id'>;
+        Update: never;
       };
     };
   };

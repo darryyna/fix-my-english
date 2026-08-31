@@ -9,9 +9,9 @@ import {
   Pressable,
 } from 'react-native';
 import { router } from 'expo-router';
-import { useAuthStore } from '@/store/authStore';
+import { useAuthStore } from '@/store/auth.store';
 import { Button } from '@/components/ui/Button';
-import { colors, spacing, radii, typography } from '@/constants/theme';
+import { colors, spacing, radii, typography } from '@/constants/theme.constants';
 
 export default function LoginScreen() {
   const signInWithEmail = useAuthStore((s) => s.signInWithEmail);

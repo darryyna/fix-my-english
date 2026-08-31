@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useAuthStore } from '@/store/authStore';
-import { useProfileStore } from '@/store/profileStore';
+import { useAuthStore } from '@/store/auth.store';
+import { useProfileStore } from '@/store/profile.store';
 import { Card } from '@/components/ui/Card';
-import { colors, spacing, typography } from '@/constants/theme';
+import { colors, spacing, typography } from '@/constants/theme.constants';
 import {useSafeAreaInsets} from "react-native-safe-area-context";
 import {AssessmentBanner} from "@/components/ui/AssessmentBanner";
 

@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, spacing, typography } from '@/constants/theme';
+import { colors, spacing, typography } from '@/constants/theme.constants';
 
 export default function VocabularyScreen() {
   return (

@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet } from 'react-native';
-import { colors, radii, spacing, typography } from '@/constants/theme';
+import { colors, radii, spacing, typography } from '@/constants/theme.constants';
 
 interface ProgressBarProps {
   label: string;

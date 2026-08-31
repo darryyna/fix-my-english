@@ -19,7 +19,7 @@ export const colors = {
   // Status
   success: '#3ECF8E',
   warning: '#F5B84C',
-  danger: '#FF6B6B',
+  error: '#FF6B6B',
 
   // Progress bar tracks per module
   vocabulary: '#5B7FFF',

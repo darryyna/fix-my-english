@@ -1,5 +1,5 @@
 import { Pressable, Text, StyleSheet, ActivityIndicator, PressableProps } from 'react-native';
-import { colors, radii, spacing, typography } from '@/constants/theme';
+import { colors, radii, spacing, typography } from '@/constants/theme.constants';
 
 interface ButtonProps extends PressableProps {
   title: string;
