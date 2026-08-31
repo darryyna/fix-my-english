@@ -2,7 +2,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { Button } from '@/components/ui/Button';
-import { colors, spacing, radii, typography } from '@/constants/theme';
+import { colors, spacing, radii, typography } from '@/constants/theme.constants';
 
 export function AssessmentBanner() {
     return (

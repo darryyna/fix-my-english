@@ -1,5 +1,5 @@
 import { View, ViewProps, StyleSheet } from 'react-native';
-import { colors, radii, spacing } from '@/constants/theme';
+import { colors, radii, spacing } from '@/constants/theme.constants';
 
 export function Card({ style, ...rest }: ViewProps) {
   return <View style={[styles.card, style]} {...rest} />;
