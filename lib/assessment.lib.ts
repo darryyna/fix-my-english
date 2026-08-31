@@ -137,7 +137,9 @@ export async function saveAssessment(
     userId: string,
     result: AssessmentResult,
     level: EnglishLevel,
+    targetLevel: EnglishLevel,
     goal: LearningGoal,
+    customGoalTopic: string | null,
     focus: FocusArea[],
     dailyGoal: DailyGoalMinutes,
 ): Promise<void> {
@@ -147,10 +149,10 @@ export async function saveAssessment(
             .insert({
                 user_id: userId,
                 suggested_level:
-                    result.suggestedLevel,
+                result.suggestedLevel,
                 grammar_score: result.grammarScore,
                 vocabulary_score:
-                    result.vocabularyScore,
+                result.vocabularyScore,
                 completed_at:
                     new Date().toISOString(),
             })
@@ -168,7 +170,7 @@ export async function saveAssessment(
                 .insert(
                     result.weakTopics.map((topic) => ({
                         assessment_id:
-                            assessment.id,
+                        assessment.id,
                         category: topic.category,
                         topic: topic.topic,
                         score: topic.score,
@@ -185,7 +187,10 @@ export async function saveAssessment(
             .from('profiles')
             .update({
                 current_level: level,
+                target_level: targetLevel,
                 goal,
+                custom_goal_topic:
+                    goal === 'custom' ? customGoalTopic : null,
                 focus,
                 daily_goal_minutes: dailyGoal,
                 assessment_completed: true,
@@ -250,13 +255,13 @@ export async function fetchLatestAssessment(
         assessment: {
             id: assessment.id,
             suggestedLevel:
-                assessment.suggested_level,
+            assessment.suggested_level,
             grammarScore:
-                assessment.grammar_score,
+            assessment.grammar_score,
             vocabularyScore:
-                assessment.vocabulary_score,
+            assessment.vocabulary_score,
             completedAt:
-                assessment.completed_at,
+            assessment.completed_at,
         },
         weakTopics:
             topics?.map((topic) => ({
